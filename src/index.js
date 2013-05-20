@@ -32,7 +32,7 @@ Future.prototype.onError = function(onError) {
 }
 
 Future.prototype.value = function(val) {
-	var successLength = this.succcess.length,
+	var successLength = this.success.length,
     	    errorLength = this.error.length,
 	    that = this;
 
@@ -62,3 +62,5 @@ Future.prototype.map = function(map) {
 
 	return future;
 }
+
+module.exports = Future;
