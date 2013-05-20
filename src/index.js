@@ -62,3 +62,5 @@ Future.prototype.map = function(map) {
 
 	return future;
 }
+
+module.exports = Future;
