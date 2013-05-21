@@ -45,6 +45,37 @@ Future.prototype.value = function(val) {
 	return this;
 }
 
+Future.prototype.sequence = function(seqOfFutures) {
+
+        var seq = [],
+            i = 0,
+            future = new Future();
+
+        // For each future
+        seqOfFutures.forEach(function(fut) {
+
+                // Keep n in this scope.
+                var n = i;
+                // Assign an onSuccess Callback
+                fut.onSuccess(function(value) {
+
+                        // Assign the value to the nth element.
+                        seq[n] = value;
+
+                        // If the length === to the original fulfil the outer future.
+                        if (seq.length === seqOfFutures.length) {
+                                future.value(seq);
+                        }
+                });
+
+                // Increment offset.
+                i++;
+        });
+
+
+        return future;
+}
+
 Future.prototype.map = function(map) {
 
 	// Create a new Future to represent th result of this map operation.
