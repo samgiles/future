@@ -27,9 +27,25 @@ Future.prototype.onSuccess = function(onSuccess) {
 }
 
 Future.prototype.onError = function(onError) {
+
+        if (this.err) {
+                onError(this.err);
+                return this;
+        }
+
 	this.error.push(onError);
 	return this;
 }
+
+Future.prototype.reject = function(error) {
+        this.error.map(function(cb) { cb(error); });
+        this.mappers.map(function(mapper) {
+                mapper['future'].reject(error);
+        });
+
+        this.err = error;
+        return this;
+};
 
 Future.prototype.value = function(val) {
 	var successLength = this.success.length,
