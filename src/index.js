@@ -67,6 +67,13 @@ Future.prototype.sequence = function(seqOfFutures) {
             i = 0,
             future = new Future();
 
+        // HACK if sequence is empty, then this is an empty Future.
+        if (seqOfFutures.length === 0) {
+                future.value([]);
+                return future;
+        }
+
+
         // For each future
         seqOfFutures.forEach(function(fut) {
 
