@@ -1,6 +1,6 @@
 {
   "name": "futures",
-  "version": "0.3.0",
+  "version": "0.3.5",
   "description": "A simple Future implementation in Javascript",
   "main": "src/index.js",
   "scripts": {
